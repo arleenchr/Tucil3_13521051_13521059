@@ -5,6 +5,7 @@ using System.Globalization;
 
 public class Program
 {
+    /*
     static void Main()
     {
         Graph result = new Graph();
@@ -22,7 +23,7 @@ public class Program
 
             //Console.WriteLine(line[0]);
 
-            /* adjacency matrix */
+            /* adjacency matrix */ /*
             string[] values = line.Split(' ');
             result.adjacencyMatrix = new double[values.Length, values.Length];
             result.vertexCount = result.adjacencyMatrix.GetLength(0);
@@ -59,7 +60,7 @@ public class Program
             }
             */
 
-            /* vertices */
+            /* vertices */ /*
             result.vertices = new List<Vertex>() { };
             int countV = 0;
             while (countV < result.vertexCount && line != null)
@@ -68,7 +69,7 @@ public class Program
                 string locName = vertexInfo[0];
                 double x = Convert.ToDouble(vertexInfo[1], CultureInfo.InvariantCulture);
                 double y = Convert.ToDouble(vertexInfo[2], CultureInfo.InvariantCulture);
-                result.vertices.Add(new Vertex(new Point(x, y), locName));
+                result.vertices.Add(new Vertex(new Coordinate(x, y), locName));
 
                 line = reader.ReadLine();
                 countV++;
@@ -81,7 +82,7 @@ public class Program
             }
             */
 
-            /* edge */
+            /* edge */ /*
             result.edges = new List<Edge>() { };
             for (int row = 0; row < result.adjacencyMatrix.GetLength(0); row++)
             {
@@ -99,7 +100,8 @@ public class Program
             {
                 Console.WriteLine(String.Format("v1 = {0}, v2 = {1}, weight = {2}", result.edges[e].V1.locName, result.edges[e].V2.locName, result.edges[e].weight));
             }
-            */
+            *//*
         }
     }
+            */
 }

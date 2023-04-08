@@ -9,11 +9,11 @@ namespace PathFinder
     public class Vertex
     {
         /* attributes */
-        public Point coordinate { get; set; }
+        public Coordinate coordinate { get; set; }
         public String locName { get; set; }
 
         /* ctor */
-        public Vertex(Point coordinate, String locName)
+        public Vertex(Coordinate coordinate, String locName)
         {
             this.coordinate = coordinate;
             this.locName = locName;

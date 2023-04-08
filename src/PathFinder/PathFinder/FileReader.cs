@@ -72,7 +72,7 @@ namespace PathFinder
                     string locName = vertexInfo[0];
                     double x = Convert.ToDouble(vertexInfo[1], CultureInfo.InvariantCulture);
                     double y = Convert.ToDouble(vertexInfo[2], CultureInfo.InvariantCulture);
-                    result.vertices.Add(new Vertex(new Point(x, y), locName));
+                    result.vertices.Add(new Vertex(new Coordinate(x, y), locName));
 
                     line = reader.ReadLine();
                     countV++;
