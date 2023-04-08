@@ -11,7 +11,7 @@ namespace PathFinder
         public int vertexCount { get; set; }
         public List<Vertex> vertices { get; set; }
         public List<Edge> edges { get; set; }
-        public double[,] adjacencyMatrix { get; set; }
+        public double[,]? adjacencyMatrix { get; set; }
 
         /* ctor */
         public Graph()

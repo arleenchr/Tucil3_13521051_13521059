@@ -8,11 +8,11 @@ namespace PathFinder
 {
     public class Point
     {
-        public int x { get; set; } // row
-        public int y { get; set; } // col
+        public double x { get; set; } // row
+        public double y { get; set; } // col
 
         /* constructor */
-        public Point(int _x, int _y)
+        public Point(double _x, double _y)
         {
             x = _x;
             y = _y;
