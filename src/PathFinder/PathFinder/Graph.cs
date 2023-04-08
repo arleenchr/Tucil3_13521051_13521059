@@ -8,32 +8,25 @@ namespace PathFinder
 {
     public class Graph
     {
-        public Vertex root { get; set; }
-        public List<LinkedList<Edge>> adjacency { get; set; }
-        
+        public int vertexCount { get; set; }
+        public List<Vertex> vertices { get; set; }
+        public List<Edge> edges { get; set; }
+        public double[,] adjacencyMatrix { get; set; }
+
         /* ctor */
-        public Graph(Vertex root) {
-            this.root = root;
-            adjacency = new List<LinkedList<Edge>>() { };
+        public Graph()
+        {
+            vertexCount = 0;
+            vertices = new List<Vertex>();
+            edges = new List<Edge>();
+            adjacencyMatrix = null;
         }
-
-        /*
-        public void addEdge(Edge edge)
+        public Graph(int vertexCount, List<Vertex> vertices, List<Edge> edges, double[,] adjacencyMatrix)
         {
-            adjacency.Add(new LinkedList<Edge>());
-            adjacency.Last().AddLast(edge);
-        }*/
-    }
-
-    public class Edge
-    {
-        public Graph neighbor { get; set; }
-        public double weight { get; set;}
-
-        public Edge(Graph neighbor, double weight)
-        {
-            this.neighbor = neighbor;
-            this.weight = weight;
+        this.vertexCount = vertexCount;
+        this.vertices = vertices;
+        this.edges = edges;
+        this.adjacencyMatrix = adjacencyMatrix;
         }
     }
 }
