@@ -9,14 +9,14 @@ namespace PathFinder
     public class Vertex
     {
         /* attributes */
-        public Coordinate coordinate { get; set; }
         public String locName { get; set; }
+        public Coordinate coordinate { get; set; }
 
         /* ctor */
-        public Vertex(Coordinate coordinate, String locName)
+        public Vertex(String locName, Coordinate coordinate)
         {
-            this.coordinate = coordinate;
             this.locName = locName;
+            this.coordinate = coordinate;
         }
     }
 }

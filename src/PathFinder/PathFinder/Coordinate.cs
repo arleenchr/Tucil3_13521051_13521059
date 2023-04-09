@@ -8,14 +8,15 @@ namespace PathFinder
 {
     public class Coordinate
     {
-        public double x { get; set; } // row
-        public double y { get; set; } // col
+        /* attributes */
+        public double latitude { get; set; } // row
+        public double longitude { get; set; } // col
 
-        /* constructor */
-        public Coordinate(double _x, double _y)
+        /* ctor */
+        public Coordinate(double _latitude, double _longitude)
         {
-            x = _x;
-            y = _y;
+            latitude = _latitude;
+            longitude = _longitude;
         }
     }
 }
