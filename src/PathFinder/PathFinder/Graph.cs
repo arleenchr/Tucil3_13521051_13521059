@@ -29,5 +29,57 @@ namespace PathFinder
             this.edges = edges;
             this.adjacencyMatrix = adjacencyMatrix;
         }
+
+        public int findIndex(Vertex v){
+            bool found = false;
+            int i = 0;
+            while(i < vertexCount && !found){
+                if (vertices[i] == v){
+                    found = true;
+                }
+                else{
+                    i++;
+                }
+            }
+            if (found){
+                return i;
+            }
+            else{
+                return -1;
+            }
+        }
+
+        /* method */
+        public Boolean adaJalan(Vertex v1, Vertex v2){
+            // cari index v1 dan v2
+            int i = findIndex(v1);
+            int j = findIndex(v2);
+
+            if (adjacencyMatrix[i,j] == 1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        public double getWeight(Vertex v1, Vertex v2){
+            bool found = false;
+            int i = 0;
+            while(i < edges.Count && !found){
+                if (edges[i].V1 == v1 && edges[i].V2 == v2){
+                    found = true;
+                }
+                else{
+                    i++;
+                }
+            }
+            if (found){
+                return edges[i].weight;
+            }
+            else{
+                return -1;
+            }
+        }
     }
 }
