@@ -67,7 +67,7 @@ namespace PathFinder
             bool found = false;
             int i = 0;
             while(i < edges.Count && !found){
-                if (edges[i].V1 == v1 && edges[i].V2 == v2){
+                if ((edges[i].V1 == v1 && edges[i].V2 == v2) || (edges[i].V1 == v2 && edges[i].V2 == v1)){
                     found = true;
                 }
                 else{
@@ -80,6 +80,17 @@ namespace PathFinder
             else{
                 return -1;
             }
+        }
+
+        public List<Vertex> getNeighbour(Vertex v){
+            int i = findIndex(v);
+            List<Vertex> arr = new List<Vertex>();
+            for(int j = 0; j < vertexCount; j++){
+                if (adjacencyMatrix[i,j] == 1){
+                    arr.Add(vertices[j]);
+                }
+            }
+            return arr;
         }
     }
 }
