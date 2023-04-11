@@ -4,24 +4,10 @@ using System.Collections.Generic;
 
 namespace PathFinder
 {
-    public class Astar
+    public class Astar : Solver
     {
-        /* attributes */
-        public Graph graph { get; set; }
-        public Vertex start { get; set; }
-        public Vertex end { get; set; }
-        public double distance { get; set; }
-        public List<Vertex> solution { get; set; }
-
         /* ctor */
-        public Astar(Graph g, Vertex s, Vertex e)
-        {
-            graph = g;
-            start = s;
-            end = e;
-            distance = 0;
-            solution = new List<Vertex>();
-        }
+        public Astar(Graph g, Vertex s, Vertex e) : base(g,s,e) { }
 
         /* method */
         public double straightDist(Vertex v1, Vertex v2)

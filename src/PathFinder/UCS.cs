@@ -8,16 +8,18 @@ using System.Threading.Tasks;
 
 namespace PathFinder
 {
-    public class UCS
+    public class UCS : Solver
     {
-        public void UCSSolver(Graph graph, Vertex start, Vertex destination, ref List<Vertex> path, ref double distance)
+        public UCS(Graph g, Vertex s, Vertex e) : base(g, s, e) { }
+
+        public void UCSSolver()
         {
             /* initialize */
-            path = new List<Vertex>() { };
+            solution = new List<Vertex>() { };
             distance = 0;
             PriorityQueueCost prioqueue = new PriorityQueueCost();
             VertexPathCost currentVertex = new VertexPathCost(start, new List<Vertex>() { }, distance);
-            Boolean isArrived = (currentVertex.vertex == destination);
+            Boolean isArrived = (currentVertex.vertex == end);
             Boolean[] isVisited = new Boolean[graph.vertexCount];
             double cost;
 
@@ -56,7 +58,7 @@ namespace PathFinder
                 */
 
                 // check if has reached the destination
-                if (currentVertex.vertex == destination)
+                if (currentVertex.vertex == end)
                 {
                     isArrived = true;
                     currentVertex.path.Add(currentVertex.vertex);
@@ -93,8 +95,28 @@ namespace PathFinder
                 }
             }
 
-            path = currentVertex.path;
+            solution = currentVertex.path;
             distance = currentVertex.cost;
         }
+
+        /*
+        public void printQueue (PriorityQueue<VertexPathCost,double> prioqueue)
+        {
+            if (prioqueue != null)
+            {
+                VertexPathCost[] arr = new VertexPathCost[prioqueue.Count];
+                prioqueue.CopyTo(arr);
+                foreach (VertexPathCost v in prioqueue)
+                {
+                    Console.Write(String.Format("Vertex {0}, path = ", v.vertex.locName));
+                    for (int i = 0; i < v.path.Count; i++)
+                    {
+                        Console.Write(v.path[i].locName);
+                    }
+                    Console.WriteLine(String.Format(", cost = {0}", v.cost));
+                }
+                Console.WriteLine("------------");
+            }
+        }*/
     }
 }
