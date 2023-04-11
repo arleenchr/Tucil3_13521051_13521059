@@ -62,7 +62,7 @@ namespace PathFinder
             int i = findIndex(v1);
             int j = findIndex(v2);
 
-            if (adjacencyMatrix != null && adjacencyMatrix[i, j] == 1)
+            if (adjacencyMatrix != null && adjacencyMatrix[i, j] > 0)
             {
                 return true;
             }
@@ -78,7 +78,7 @@ namespace PathFinder
             int i = 0;
             while (i < edges.Count && !found)
             {
-                if ((edges[i].V1 == v1 && edges[i].V2 == v2) || (edges[i].V1 == v2 && edges[i].V2 == v1))
+                if (edges[i].V1 == v1 && edges[i].V2 == v2)
                 {
                     found = true;
                 }

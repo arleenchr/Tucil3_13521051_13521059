@@ -85,15 +85,15 @@ namespace PathFinder
                 // list of edges between vertex 1 and vertex 2 (with value 1 in adjacency matrix)
                 // weight calculated by haversine formula between two vertex coordinates (longitude and latitude)
                 // precondition: adjacency matrix is symmetrical
-                for (int i = 1; i < graph.adjacencyMatrix.GetLength(0); i++)
+                for (int i = 0; i < graph.adjacencyMatrix.GetLength(0); i++)
                 {
-                    for (int j = 0; j < i; j++)
+                    for (int j = 0; j < graph.adjacencyMatrix.GetLength(1); j++)
                     {
                         if (graph.adjacencyMatrix[i, j] != 0)
                         {
                             Vertex V1 = graph.vertices[i];
                             Vertex V2 = graph.vertices[j];
-                            graph.edges.Add(new Edge(V1, V2));
+                            graph.edges.Add(new Edge(V1, V2, graph.adjacencyMatrix[i, j]));
                         }
                     }
                 }
