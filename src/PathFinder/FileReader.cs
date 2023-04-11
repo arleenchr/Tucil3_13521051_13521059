@@ -19,7 +19,7 @@ namespace PathFinder
 
             using (StreamReader reader = new StreamReader(pathfilename))
             {
-                string? line = reader.ReadLine();
+                string line = reader.ReadLine();
                 if (line == null) throw new InvalidDataException("File tidak valid!");
 
                 // vertex count

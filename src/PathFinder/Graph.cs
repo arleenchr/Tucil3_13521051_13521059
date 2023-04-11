@@ -12,7 +12,7 @@ namespace PathFinder
         public int vertexCount { get; set; }
         public List<Vertex> vertices { get; set; }
         public List<Edge> edges { get; set; }
-        public int[,]? adjacencyMatrix { get; set; }
+        public int[,] adjacencyMatrix { get; set; }
 
         /* ctor */
         public Graph()
@@ -62,7 +62,7 @@ namespace PathFinder
             int i = findIndex(v1);
             int j = findIndex(v2);
 
-            if (adjacencyMatrix[i, j] == 1)
+            if (adjacencyMatrix != null && adjacencyMatrix[i, j] == 1)
             {
                 return true;
             }
