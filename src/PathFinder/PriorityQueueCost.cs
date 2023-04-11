@@ -52,11 +52,8 @@ namespace PathFinder
                         isFound = true;
                     }
                 }
-                if (idx == queue.Count - 1)
-                {
-                    queue.Add(v);
-                }
-                else if (idx == 0)
+
+                if (idx == 0)
                 {
                     if (v.cost < queue[idx].cost)
                     {
@@ -66,6 +63,10 @@ namespace PathFinder
                     {
                         queue.Insert(idx + 1, v);
                     }
+                }
+                else if (idx == queue.Count - 1)
+                {
+                    queue.Add(v);
                 }
                 else
                 {

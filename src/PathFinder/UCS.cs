@@ -10,7 +10,12 @@ namespace PathFinder
 {
     public class UCS : Solver
     {
-        public UCS(Graph g, Vertex s, Vertex e) : base(g, s, e) { }
+        public List<(VertexPathCost, List<VertexPathCost>)> history { get; set; }
+
+        public UCS(Graph g, Vertex s, Vertex e) : base(g, s, e)
+        {
+            history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
+        }
 
         public void UCSSolver()
         {
@@ -36,7 +41,7 @@ namespace PathFinder
 
                 }
             }
-
+            history.Add(new(currentVertex, prioqueue.queue));
             isVisited[graph.findIndex(start)] = true;
 
 
@@ -62,18 +67,18 @@ namespace PathFinder
                 {
                     isArrived = true;
                     currentVertex.path.Add(currentVertex.vertex);
+                    history.Add(new(currentVertex, new List<VertexPathCost>() { }));
                     break;
                 }
 
                 // enqueue
+                List<VertexPathCost> historyQueue = new List<VertexPathCost>() { };
                 for (int j = 0; j < graph.vertexCount; j++)
                 {
                     if (!isVisited[j] && graph.adaJalan(currentVertex.vertex, graph.vertices[j]))
                     {
-
                         //Console.WriteLine("     Enqueue");
                         //Console.WriteLine(String.Format("     cost = {0} + {1}", currentVertex.cost, graph.getWeight(currentVertex.vertex, graph.vertices[j])));
-
 
                         List<Vertex> currentPath = new List<Vertex>(currentVertex.path);
                         if (currentPath.Last() != currentVertex.vertex)
@@ -82,7 +87,7 @@ namespace PathFinder
                         }
                         cost = currentVertex.cost + graph.getWeight(currentVertex.vertex, graph.vertices[j]);
                         prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], currentPath, cost));
-
+                        historyQueue.Add(new VertexPathCost(graph.vertices[j], currentPath, cost));
                         /*
                         Console.Write(String.Format("     {0}, path = ", graph.vertices[j].locName));
                         for (int i=0; i<currentPath.Count; i++)
@@ -93,30 +98,11 @@ namespace PathFinder
                         */
                     }
                 }
+                history.Add(new(currentVertex, historyQueue));
             }
 
             solution = currentVertex.path;
             distance = currentVertex.cost;
         }
-
-        /*
-        public void printQueue (PriorityQueue<VertexPathCost,double> prioqueue)
-        {
-            if (prioqueue != null)
-            {
-                VertexPathCost[] arr = new VertexPathCost[prioqueue.Count];
-                prioqueue.CopyTo(arr);
-                foreach (VertexPathCost v in prioqueue)
-                {
-                    Console.Write(String.Format("Vertex {0}, path = ", v.vertex.locName));
-                    for (int i = 0; i < v.path.Count; i++)
-                    {
-                        Console.Write(v.path[i].locName);
-                    }
-                    Console.WriteLine(String.Format(", cost = {0}", v.cost));
-                }
-                Console.WriteLine("------------");
-            }
-        }*/
     }
 }
