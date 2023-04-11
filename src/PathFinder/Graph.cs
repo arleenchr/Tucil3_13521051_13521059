@@ -110,5 +110,23 @@ namespace PathFinder
             }
             return arr;
         }
+
+        public Vertex getVertex(String name)
+        {
+            bool found = false;
+            int i = 0;
+            while(i < vertices.Count && !found)
+            {
+                if (vertices[i].locName == name)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            return vertices[i];
+        }
     }
 }

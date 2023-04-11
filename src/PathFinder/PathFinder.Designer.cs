@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace PathFinder
 {
     partial class PathFinder
     {
@@ -28,40 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.labelPathFinder = new System.Windows.Forms.Label();
             this.textBoxFileName = new System.Windows.Forms.TextBox();
             this.labelFileName = new System.Windows.Forms.Label();
             this.labelMethod = new System.Windows.Forms.Label();
-            this.labelUCS = new System.Windows.Forms.RadioButton();
+            this.buttonUCS = new System.Windows.Forms.RadioButton();
             this.buttonA = new System.Windows.Forms.RadioButton();
             this.labelStart = new System.Windows.Forms.Label();
             this.labelEnd = new System.Windows.Forms.Label();
             this.textBoxStart = new System.Windows.Forms.TextBox();
             this.textBoxEnd = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonVisualize = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(371, 122);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 2;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(498, 403);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
             // 
             // labelPathFinder
             // 
@@ -101,17 +80,17 @@
             this.labelMethod.TabIndex = 4;
             this.labelMethod.Text = "Method:";
             // 
-            // labelUCS
+            // buttonUCS
             // 
-            this.labelUCS.AutoSize = true;
-            this.labelUCS.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUCS.Location = new System.Drawing.Point(61, 260);
-            this.labelUCS.Name = "labelUCS";
-            this.labelUCS.Size = new System.Drawing.Size(70, 28);
-            this.labelUCS.TabIndex = 5;
-            this.labelUCS.TabStop = true;
-            this.labelUCS.Text = "UCS";
-            this.labelUCS.UseVisualStyleBackColor = true;
+            this.buttonUCS.AutoSize = true;
+            this.buttonUCS.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUCS.Location = new System.Drawing.Point(61, 260);
+            this.buttonUCS.Name = "buttonUCS";
+            this.buttonUCS.Size = new System.Drawing.Size(70, 28);
+            this.buttonUCS.TabIndex = 5;
+            this.buttonUCS.TabStop = true;
+            this.buttonUCS.Text = "UCS";
+            this.buttonUCS.UseVisualStyleBackColor = true;
             // 
             // buttonA
             // 
@@ -161,44 +140,62 @@
             this.textBoxEnd.Size = new System.Drawing.Size(187, 32);
             this.textBoxEnd.TabIndex = 10;
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(403, 132);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(580, 395);
+            this.panel1.TabIndex = 11;
+            // 
+            // buttonVisualize
+            // 
+            this.buttonVisualize.Font = new System.Drawing.Font("Candara", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonVisualize.Location = new System.Drawing.Point(60, 554);
+            this.buttonVisualize.Name = "buttonVisualize";
+            this.buttonVisualize.Size = new System.Drawing.Size(111, 36);
+            this.buttonVisualize.TabIndex = 12;
+            this.buttonVisualize.Text = "VISUALIZE";
+            this.buttonVisualize.UseVisualStyleBackColor = true;
+            this.buttonVisualize.Click += new System.EventHandler(this.buttonVisualize_Click);
+            // 
             // PathFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1077, 559);
+            this.ClientSize = new System.Drawing.Size(1077, 652);
+            this.Controls.Add(this.buttonVisualize);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBoxEnd);
             this.Controls.Add(this.textBoxStart);
             this.Controls.Add(this.labelEnd);
             this.Controls.Add(this.labelStart);
             this.Controls.Add(this.buttonA);
-            this.Controls.Add(this.labelUCS);
+            this.Controls.Add(this.buttonUCS);
             this.Controls.Add(this.labelMethod);
             this.Controls.Add(this.labelFileName);
             this.Controls.Add(this.textBoxFileName);
             this.Controls.Add(this.labelPathFinder);
-            this.Controls.Add(this.chart1);
             this.Name = "PathFinder";
             this.Text = "Path Finder";
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label labelPathFinder;
         private System.Windows.Forms.TextBox textBoxFileName;
         private System.Windows.Forms.Label labelFileName;
         private System.Windows.Forms.Label labelMethod;
-        private System.Windows.Forms.RadioButton labelUCS;
+        private System.Windows.Forms.RadioButton buttonUCS;
         private System.Windows.Forms.RadioButton buttonA;
         private System.Windows.Forms.Label labelStart;
         private System.Windows.Forms.Label labelEnd;
         private System.Windows.Forms.TextBox textBoxStart;
         private System.Windows.Forms.TextBox textBoxEnd;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonVisualize;
     }
 }
 
