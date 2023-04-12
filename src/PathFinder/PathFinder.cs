@@ -41,6 +41,11 @@ namespace PathFinder
             else
             {
                 start = filegraph.getVertex(textBoxStart.Text);
+                if (start.locName == "notfound")
+                {
+                    labelNotif.Text = "Start/End not valid.";
+                    return;
+                }
             }
             if (textBoxEnd.Text == "")
             {
@@ -49,8 +54,13 @@ namespace PathFinder
             else
             {
                 end = filegraph.getVertex(textBoxEnd.Text);
+                if (end.locName == "notfound")
+                {
+                    labelNotif.Text = "Start/End not valid.";
+                    return;
+                }
             }
-
+            labelNotif.Text = "";
             textBox1.Clear();
 
             // isi textboxt dengan tempat
@@ -58,7 +68,6 @@ namespace PathFinder
             {
                 textBox1.Text += filegraph.vertices[i].locName + "\n";
             }
-
             if (buttonUCS.Checked == true)
             {
                 List<VertexPathCost> neigh;

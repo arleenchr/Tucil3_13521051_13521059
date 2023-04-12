@@ -127,7 +127,15 @@ namespace PathFinder
                     i++;
                 }
             }
-            return vertices[i];
+            if (found)
+            {
+                return vertices[i];
+            }
+            else
+            {
+                return new Vertex("notfound", new Coordinate(0,0));
+            }
+            
         }
     }
 }
