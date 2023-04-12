@@ -15,10 +15,10 @@ namespace PathFinder
         public void UCSSolver()
         {
             /* initialize */
-            solution = new List<Vertex>() { };
+            solution = new List<VertexPathCost>() { };
             distance = 0;
             PriorityQueueCost prioqueue = new PriorityQueueCost();
-            VertexPathCost currentVertex = new VertexPathCost(start, new List<Vertex>() { }, distance);
+            VertexPathCost currentVertex = new VertexPathCost(start, new List<VertexPathCost>() { }, distance);
             Boolean isArrived = (currentVertex.vertex == end);
             Boolean[] isVisited = new Boolean[graph.vertexCount];
             double cost;
@@ -31,8 +31,8 @@ namespace PathFinder
                 if (graph.adaJalan(start, graph.vertices[j]))
                 {
                     cost = graph.getWeight(start, graph.vertices[j]);
-                    prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
-                    historyQueue.Add(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
+                    prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], new List<VertexPathCost>() { currentVertex }, cost));
+                    historyQueue.Add(new VertexPathCost(graph.vertices[j], new List<VertexPathCost>() { currentVertex }, cost));
                 }
             }
 
@@ -51,7 +51,7 @@ namespace PathFinder
                 if (currentVertex.vertex == end)
                 {
                     isArrived = true;
-                    currentVertex.path.Add(currentVertex.vertex);
+                    currentVertex.path.Add(currentVertex);
                     history.Add((currentVertex, new List<VertexPathCost>() { }));
                     break;
                 }
@@ -62,10 +62,10 @@ namespace PathFinder
                 {
                     if (!isVisited[j] && graph.adaJalan(currentVertex.vertex, graph.vertices[j]))
                     {
-                        List<Vertex> currentPath = new List<Vertex>(currentVertex.path);
-                        if (currentPath.Last() != currentVertex.vertex)
+                        List<VertexPathCost> currentPath = new List<VertexPathCost>(currentVertex.path);
+                        if (currentPath.Last() != currentVertex)
                         {
-                            currentPath.Add(currentVertex.vertex);
+                            currentPath.Add(currentVertex);
                         }
                         cost = currentVertex.cost + graph.getWeight(currentVertex.vertex, graph.vertices[j]);
                         prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], currentPath, cost));
@@ -79,14 +79,14 @@ namespace PathFinder
             {
                 // path tidak ditemukan
                 distance = 0;
-                solution = new List<Vertex>() { };
+                solution = new List<VertexPathCost>() { };
             }
             else
             {
                 // result
                 if (currentVertex.vertex == start)
                 {
-                    currentVertex.path.Add(start);
+                    currentVertex.path.Add(currentVertex);
                 }
                 solution = currentVertex.path;
                 distance = currentVertex.cost;

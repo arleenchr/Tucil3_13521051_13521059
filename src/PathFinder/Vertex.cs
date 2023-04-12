@@ -26,10 +26,10 @@ namespace PathFinder
     {
         /* attributes */
         public Vertex vertex { get; set; }
-        public List<Vertex> path { get; set; }
+        public List<VertexPathCost> path { get; set; }
         public double cost { get; set; }
         /* ctor */
-        public VertexPathCost(Vertex vertex, List<Vertex> path, double cost)
+        public VertexPathCost(Vertex vertex, List<VertexPathCost> path, double cost)
         {
             this.vertex = vertex;
             this.path = path;
@@ -38,7 +38,7 @@ namespace PathFinder
         public VertexPathCost(Vertex vertex)
         {
             this.vertex = vertex;
-            this.path = new List<Vertex>() { };
+            this.path = new List<VertexPathCost>() { };
             this.cost = 0;
         }
     }

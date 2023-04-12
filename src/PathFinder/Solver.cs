@@ -14,7 +14,7 @@ namespace PathFinder
         public Vertex start { get; set; }
         public Vertex end { get; set; }
         public double distance { get; set; }
-        public List<Vertex> solution { get; set; }
+        public List<VertexPathCost> solution { get; set; }
         public List<(VertexPathCost, List<VertexPathCost>)> history { get; set; }
 
         /* ctor */
@@ -24,7 +24,7 @@ namespace PathFinder
             start = s;
             end = e;
             distance = 0;
-            solution = new List<Vertex>();
+            solution = new List<VertexPathCost>();
             history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
         }
     }
