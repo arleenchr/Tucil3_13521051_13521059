@@ -85,6 +85,10 @@ namespace PathFinder
             else
             {
                 // result
+                if (currentVertex.vertex == start)
+                {
+                    currentVertex.path.Add(start);
+                }
                 solution = currentVertex.path;
                 distance = currentVertex.cost;
             }
