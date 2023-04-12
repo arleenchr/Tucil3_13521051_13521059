@@ -10,12 +10,7 @@ namespace PathFinder
 {
     public class UCS : Solver
     {
-        public List<(VertexPathCost, List<VertexPathCost>)> history { get; set; }
-
-        public UCS(Graph g, Vertex s, Vertex e) : base(g, s, e)
-        {
-            history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
-        }
+        public UCS(Graph g, Vertex s, Vertex e) : base(g, s, e) { }
 
         public void UCSSolver()
         {
@@ -27,6 +22,8 @@ namespace PathFinder
             Boolean isArrived = (currentVertex.vertex == end);
             Boolean[] isVisited = new Boolean[graph.vertexCount];
             double cost;
+            history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
+            List<VertexPathCost> historyQueue = new List<VertexPathCost>() { };
 
             // Add vertices adjacent with start vertex to prioqueue
             for (int j = 0; j < graph.vertexCount; j++)
@@ -35,9 +32,11 @@ namespace PathFinder
                 {
                     cost = graph.getWeight(start, graph.vertices[j]);
                     prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
+                    historyQueue.Add(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
                 }
             }
-            history.Add((currentVertex, prioqueue.queue)); // add to history
+
+            history.Add((currentVertex, historyQueue)); // add to history
             isVisited[graph.findIndex(start)] = true; // marked as visited
 
             // Search while hasn't arrived at the destination and prioqueue is not empty
@@ -58,7 +57,7 @@ namespace PathFinder
                 }
 
                 // enqueue
-                List<VertexPathCost> historyQueue = new List<VertexPathCost>() { };
+                historyQueue = new List<VertexPathCost>() { };
                 for (int j = 0; j < graph.vertexCount; j++)
                 {
                     if (!isVisited[j] && graph.adaJalan(currentVertex.vertex, graph.vertices[j]))

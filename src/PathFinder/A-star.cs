@@ -10,12 +10,7 @@ namespace PathFinder
 {
     public class Astar : Solver
     {
-        public List<(VertexPathCost, List<VertexPathCost>)> history { get; set; }
-
-        public Astar(Graph g, Vertex s, Vertex e) : base(g, s, e)
-        {
-            history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
-        }
+        public Astar(Graph g, Vertex s, Vertex e) : base(g, s, e) { }
 
         public double straightDist(Vertex v1, Vertex v2)
         {
@@ -39,6 +34,8 @@ namespace PathFinder
             Boolean isArrived = (currentVertex.vertex == end);
             Boolean[] isVisited = new Boolean[graph.vertexCount];
             double cost;
+            history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
+            List<VertexPathCost> historyQueue = new List<VertexPathCost>() { };
 
             // Add vertices adjacent with start vertex to prioqueue
             for (int j = 0; j < graph.vertexCount; j++)
@@ -47,12 +44,10 @@ namespace PathFinder
                 {
                     cost = graph.getWeight(start, graph.vertices[j]) + straightDist(graph.vertices[j], end);
                     prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
-                    //Console.WriteLine("     Enqueue");
-                    //Console.WriteLine(String.Format("     {0}, path = {1}, {2}", graph.vertices[j].locName, start.locName, cost));
-
+                    historyQueue.Add(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
                 }
             }
-            history.Add((currentVertex, prioqueue.queue)); // add to history
+            history.Add((currentVertex, historyQueue)); // add to history
             isVisited[graph.findIndex(start)] = true; // marked as visited
 
             // Search while hasn't arrived at the destination and prioqueue is not empty
@@ -62,14 +57,6 @@ namespace PathFinder
                 currentVertex = prioqueue.Peek();
                 prioqueue.Dequeue();
                 isVisited[graph.findIndex(currentVertex.vertex)] = true;
-                /*
-                Console.Write(String.Format("Current = {0}, path = ", currentVertex.vertex.locName));
-                for (int i = 0; i < currentVertex.path.Count; i++)
-                {
-                    Console.Write(String.Format("{0}, ", currentVertex.path[i].locName));
-                }
-                Console.WriteLine(currentVertex.cost);
-                */
 
                 // check if has reached the destination
                 if (currentVertex.vertex == end)
@@ -81,13 +68,11 @@ namespace PathFinder
                 }
 
                 // enqueue
-                List<VertexPathCost> historyQueue = new List<VertexPathCost>() { };
+                historyQueue = new List<VertexPathCost>() { };
                 for (int j = 0; j < graph.vertexCount; j++)
                 {
                     if (!isVisited[j] && graph.adaJalan(currentVertex.vertex, graph.vertices[j]))
                     {
-                        //Console.WriteLine("     Enqueue");
-
                         List<Vertex> currentPath = new List<Vertex>(currentVertex.path);
                         if (currentPath.Last() != currentVertex.vertex)
                         {
@@ -96,15 +81,6 @@ namespace PathFinder
                         cost = currentVertex.cost + graph.getWeight(currentVertex.vertex, graph.vertices[j]) + straightDist(graph.vertices[j], end);
                         prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], currentPath, cost));
                         historyQueue.Add(new VertexPathCost(graph.vertices[j], currentPath, cost));
-
-                        /*
-                        Console.Write(String.Format("     {0}, path = ", graph.vertices[j].locName));
-                        for (int i = 0; i < currentPath.Count; i++)
-                        {
-                            Console.Write(String.Format("{0}, ", currentPath[i].locName));
-                        }
-                        Console.WriteLine(cost);
-                        */
                     }
                 }
                 history.Add((currentVertex, historyQueue)); // add to history
