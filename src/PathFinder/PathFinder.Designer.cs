@@ -222,6 +222,7 @@
             this.textBoxFile.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxFile.Location = new System.Drawing.Point(60, 130);
             this.textBoxFile.Name = "textBoxFile";
+            this.textBoxFile.ReadOnly = true;
             this.textBoxFile.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBoxFile.Size = new System.Drawing.Size(213, 32);
             this.textBoxFile.TabIndex = 20;

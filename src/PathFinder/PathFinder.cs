@@ -32,6 +32,15 @@ namespace PathFinder
 
             // Generate map
             FileReader reader = new FileReader();
+            try
+            {
+                reader.readFile(textBoxFile.Text);
+            }
+            catch(InvalidDataException)
+            {
+                labelNotif.Text = "File not valid.";
+                return;
+            }
             Graph filegraph = reader.readFile(textBoxFile.Text);
             Vertex start, end;
             if (textBoxStart.Text == "")
@@ -198,6 +207,15 @@ namespace PathFinder
                 listPlaces.Items.Clear();
                 labelNotif.Text = "";
                 FileReader reader = new FileReader();
+                try
+                {
+                    reader.readFile(textBoxFile.Text);
+                }
+                catch (InvalidDataException)
+                {
+                    labelNotif.Text = "File not valid.";
+                    return;
+                }
                 Graph filegraph = reader.readFile(textBoxFile.Text);
                 // isi textboxt dengan tempat
                 for (int i = 0; i < filegraph.vertices.Count; i++)
