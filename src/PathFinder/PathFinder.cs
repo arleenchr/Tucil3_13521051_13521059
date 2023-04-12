@@ -57,17 +57,18 @@ namespace PathFinder
 
                 // buat graf dari history
                 Node nodestart = new Node(u.history[0].Item1.vertex.locName + " (" + u.history[0].Item1.cost.ToString() + ")");
+                Node currentNode = nodestart;
                 for (int i = 0; i < u.history.Count; i++)
                 {
                     neigh = u.history[i].Item2;
                     // buat node tiap tetangga
                     for (int j = 0; j < neigh.Count; j++)
                     {
-                        Microsoft.Msagl.Drawing.Node node = new Microsoft.Msagl.Drawing.Node(neigh[j].vertex.locName + " (" + neigh[j]);
-
-                        graph.AddEdge(u.history[i].Item2[j].vertex.locName, "", node.Id);
+                        Microsoft.Msagl.Drawing.Node node = new Microsoft.Msagl.Drawing.Node(neigh[j].vertex.locName + " (" + neigh[j].cost.ToString() + ")");
+                        graph.AddEdge(currentNode.Id, "", node.Id);
                     }
-                    
+                    // cari current node selanjutnya
+                    currentNode = graph.FindNode(u.history[i+1])
                 }
 
             }

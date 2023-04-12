@@ -48,7 +48,7 @@ namespace PathFinder
                     }
                 }
             }
-            distance += min.Item2;
+            //distance += min.Item2;
             return min.Item1;
         }
 
@@ -97,7 +97,7 @@ namespace PathFinder
 
                 // pilih tetangga
                 Vertex chosen = chooseNeigh(neighbour);
-
+                distance += graph.getWeight(curr, chosen);
                 // add solution
                 solution.Add(chosen);
                 printSolution();
