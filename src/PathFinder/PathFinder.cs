@@ -61,12 +61,12 @@ namespace PathFinder
                 }
             }
             labelNotif.Text = "";
-            textBox1.Clear();
+            listPlaces.Items.Clear();
 
             // isi textboxt dengan tempat
             for(int i = 0; i < filegraph.vertices.Count; i++)
             {
-                textBox1.Text += filegraph.vertices[i].locName + "\n";
+                listPlaces.Items.Add(filegraph.vertices[i].locName);
             }
             if (buttonUCS.Checked == true)
             {
@@ -195,14 +195,14 @@ namespace PathFinder
         {
             try
             {
-                textBox1.Clear();
+                listPlaces.Items.Clear();
                 labelNotif.Text = "";
                 FileReader reader = new FileReader();
                 Graph filegraph = reader.readFile(textBoxFileName.Text);
                 // isi textboxt dengan tempat
                 for (int i = 0; i < filegraph.vertices.Count; i++)
                 {
-                    textBox1.Text += filegraph.vertices[i].locName + "\n";
+                    listPlaces.Items.Add(filegraph.vertices[i].locName);
                 }
             }
             catch (FileNotFoundException)

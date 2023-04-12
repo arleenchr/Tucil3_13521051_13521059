@@ -41,9 +41,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonVisualize = new System.Windows.Forms.Button();
             this.labelNotif = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.labelPlaces = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.listPlaces = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // labelPathFinder
@@ -171,17 +171,6 @@
             this.labelNotif.Size = new System.Drawing.Size(0, 29);
             this.labelNotif.TabIndex = 13;
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox1.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(61, 253);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(334, 95);
-            this.textBox1.TabIndex = 14;
-            // 
             // labelPlaces
             // 
             this.labelPlaces.AutoSize = true;
@@ -203,15 +192,26 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button_generate);
             // 
+            // listPlaces
+            // 
+            this.listPlaces.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listPlaces.FormattingEnabled = true;
+            this.listPlaces.ItemHeight = 24;
+            this.listPlaces.Location = new System.Drawing.Point(64, 252);
+            this.listPlaces.Name = "listPlaces";
+            this.listPlaces.ScrollAlwaysVisible = true;
+            this.listPlaces.Size = new System.Drawing.Size(335, 100);
+            this.listPlaces.TabIndex = 17;
+            // 
             // PathFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1077, 652);
+            this.Controls.Add(this.listPlaces);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelPlaces);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelNotif);
             this.Controls.Add(this.buttonVisualize);
             this.Controls.Add(this.panel1);
@@ -246,9 +246,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonVisualize;
         private System.Windows.Forms.Label labelNotif;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label labelPlaces;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox listPlaces;
     }
 }
 
