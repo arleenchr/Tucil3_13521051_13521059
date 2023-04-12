@@ -43,14 +43,10 @@ namespace PathFinder
                     line = reader.ReadLine();
                     vCount++;
                 }
-                /*for (int v = 0; v < graph.vertices.Count; v++)
-                {
-                    Console.WriteLine(String.Format("loc = {0}, position = {1},{2}", graph.vertices[v].locName, graph.vertices[v].coordinate.latitude, graph.vertices[v].coordinate.longitude));
-                }*/
 
                 // adjacency matrix
                 vCount = 0;
-                graph.adjacencyMatrix = new int[graph.vertexCount, graph.vertexCount];
+                graph.adjacencyMatrix = new double[graph.vertexCount, graph.vertexCount];
                 while (vCount < graph.vertexCount && line != null)
                 {
                     string[] matrixRow = line.Split(' ');
@@ -64,22 +60,6 @@ namespace PathFinder
                     line = reader.ReadLine();
                     vCount++;
                 }
-
-                /*for (int row = 0; row < graph.adjacencyMatrix.GetLength(0); row++)
-                {
-                    for (int col = 0; col < graph.adjacencyMatrix.GetLength(1); col++)
-                    {
-                        Console.Write(graph.adjacencyMatrix[row, col]);
-                        if (col < graph.adjacencyMatrix.GetLength(1) - 1)
-                        {
-                            Console.Write(", ");
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                        }
-                    }
-                }*/
 
                 // edges
                 // list of edges between vertex 1 and vertex 2 (with value 1 in adjacency matrix)
@@ -97,11 +77,6 @@ namespace PathFinder
                         }
                     }
                 }
-
-                /*for (int count = 0; count<graph.edges.Count; count++)
-                {
-                    Console.WriteLine(String.Format("V1 = {0}, V2 = {1}, weight = {2}", graph.edges[count].V1.locName, graph.edges[count].V2.locName, graph.edges[count].weight));
-                }*/
             }
             return graph;
         }

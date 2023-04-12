@@ -11,6 +11,7 @@ namespace PathFinder
         // Priority Queue of VertexPathCost, ordered by cost (ascending)
         public List<VertexPathCost> queue { get; set; }
 
+        /* ctor */
         public PriorityQueueCost()
         {
             queue = new List<VertexPathCost>() { };
@@ -23,18 +24,21 @@ namespace PathFinder
         /* methods */
         public VertexPathCost Peek()
         {
+            // get the head of the queue (0th element)
             return queue[0];
         }
         public int Count()
         {
+            // get the number of elements in queue
             return queue.Count;
         }
 
         public void Enqueue(VertexPathCost v)
         {
+            // enqueue with priority (cost priority, ascending)
             if (queue.Count == 0)
             {
-                queue.Add(v);
+                queue.Add(v); // if queue is empty
             }
             else
             {
@@ -76,6 +80,7 @@ namespace PathFinder
         }
         public void Dequeue()
         {
+            // remove 0th element of the queue
             queue.RemoveAt(0);
         }
     }

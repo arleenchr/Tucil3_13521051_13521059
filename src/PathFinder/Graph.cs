@@ -12,7 +12,7 @@ namespace PathFinder
         public int vertexCount { get; set; }
         public List<Vertex> vertices { get; set; }
         public List<Edge> edges { get; set; }
-        public int[,] adjacencyMatrix { get; set; }
+        public double[,] adjacencyMatrix { get; set; }
 
         /* ctor */
         public Graph()
@@ -22,7 +22,7 @@ namespace PathFinder
             edges = new List<Edge>();
             adjacencyMatrix = null;
         }
-        public Graph(int vertexCount, List<Vertex> vertices, List<Edge> edges, int[,] adjacencyMatrix)
+        public Graph(int vertexCount, List<Vertex> vertices, List<Edge> edges, double[,] adjacencyMatrix)
         {
             this.vertexCount = vertexCount;
             this.vertices = vertices;
@@ -30,6 +30,7 @@ namespace PathFinder
             this.adjacencyMatrix = adjacencyMatrix;
         }
 
+        /* methods */
         public int findIndex(Vertex v)
         {
             bool found = false;

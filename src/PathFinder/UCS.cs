@@ -35,17 +35,12 @@ namespace PathFinder
                 {
                     cost = graph.getWeight(start, graph.vertices[j]);
                     prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
-
-                    //Console.WriteLine("     Enqueue");
-                    //Console.WriteLine(String.Format("     {0}, path = {1}, {2}", graph.vertices[j].locName, start.locName, cost));
-
                 }
             }
-            history.Add(new(currentVertex, prioqueue.queue));
-            isVisited[graph.findIndex(start)] = true;
+            history.Add((currentVertex, prioqueue.queue)); // add to history
+            isVisited[graph.findIndex(start)] = true; // marked as visited
 
-
-
+            // Search while hasn't arrived at the destination and prioqueue is not empty
             while (!isArrived && prioqueue.Count() > 0)
             {
                 // Dequeue
@@ -53,21 +48,12 @@ namespace PathFinder
                 prioqueue.Dequeue();
                 isVisited[graph.findIndex(currentVertex.vertex)] = true;
 
-                /*
-                Console.Write(String.Format("Current = {0}, path = ", currentVertex.vertex.locName));
-                for (int i = 0; i < currentVertex.path.Count; i++)
-                {
-                    Console.Write(String.Format("{0}, ",currentVertex.path[i].locName));
-                }
-                Console.WriteLine(currentVertex.cost);
-                */
-
                 // check if has reached the destination
                 if (currentVertex.vertex == end)
                 {
                     isArrived = true;
                     currentVertex.path.Add(currentVertex.vertex);
-                    history.Add(new(currentVertex, new List<VertexPathCost>() { }));
+                    history.Add((currentVertex, new List<VertexPathCost>() { }));
                     break;
                 }
 
@@ -77,9 +63,6 @@ namespace PathFinder
                 {
                     if (!isVisited[j] && graph.adaJalan(currentVertex.vertex, graph.vertices[j]))
                     {
-                        //Console.WriteLine("     Enqueue");
-                        //Console.WriteLine(String.Format("     cost = {0} + {1}", currentVertex.cost, graph.getWeight(currentVertex.vertex, graph.vertices[j])));
-
                         List<Vertex> currentPath = new List<Vertex>(currentVertex.path);
                         if (currentPath.Last() != currentVertex.vertex)
                         {
@@ -88,21 +71,23 @@ namespace PathFinder
                         cost = currentVertex.cost + graph.getWeight(currentVertex.vertex, graph.vertices[j]);
                         prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], currentPath, cost));
                         historyQueue.Add(new VertexPathCost(graph.vertices[j], currentPath, cost));
-                        /*
-                        Console.Write(String.Format("     {0}, path = ", graph.vertices[j].locName));
-                        for (int i=0; i<currentPath.Count; i++)
-                        {
-                            Console.Write(String.Format("{0}, ", currentPath[i].locName));
-                        }
-                        Console.WriteLine(cost);
-                        */
                     }
                 }
-                history.Add(new(currentVertex, historyQueue));
+                history.Add((currentVertex, historyQueue)); // add to history
             }
 
-            solution = currentVertex.path;
-            distance = currentVertex.cost;
+            if (prioqueue.Count() == 0 && !isArrived)
+            {
+                // path tidak ditemukan
+                distance = 0;
+                solution = new List<Vertex>() { };
+            }
+            else
+            {
+                // result
+                solution = currentVertex.path;
+                distance = currentVertex.cost;
+            }
         }
     }
 }
