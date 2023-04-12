@@ -7,14 +7,9 @@ PathFinder adalah program untuk mencari rute terpendek dari suatu lokasi ke loka
 ```
 Tucil3_13521051_13521059
 ├─── bin
-│   ├─── map1.1.txt
-│   ├─── map1.txt
-│   ├─── map2.1.txt
-│   ├─── map2.txt
-│   ├─── map3.txt
-│   ├─── map4.txt
-│   ├─── map5.txt
-│   └─── PathFinder.exe
+│   ├─── ...
+│   ├─── PathFinder.exe
+│   └─── ...
 ├─── doc
 |   └─── Tucil3_13521051_13521059.pdf
 ├─── src
@@ -46,6 +41,14 @@ Tucil3_13521051_13521059
 |   |    ├─── Solver.cs
 |   |    ├─── UCS.cs
 |   |    └─── Vertex.cs
+├─── test
+│   ├─── map1.1.txt
+│   ├─── map1.txt
+│   ├─── map2.1.txt
+│   ├─── map2.txt
+│   ├─── map3.txt
+│   ├─── map4.txt
+│   ├─── map5.txt
 └─── README.md
 ```
 
