@@ -232,6 +232,7 @@ namespace PathFinder
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = "..\\test";
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 textBoxFile.Text = ofd.FileName;
