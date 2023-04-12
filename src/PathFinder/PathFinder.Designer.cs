@@ -50,7 +50,7 @@
             // 
             this.labelPathFinder.AutoSize = true;
             this.labelPathFinder.Font = new System.Drawing.Font("Candara", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPathFinder.Location = new System.Drawing.Point(394, 24);
+            this.labelPathFinder.Location = new System.Drawing.Point(478, 28);
             this.labelPathFinder.Name = "labelPathFinder";
             this.labelPathFinder.Size = new System.Drawing.Size(252, 49);
             this.labelPathFinder.TabIndex = 1;
@@ -148,7 +148,7 @@
             // 
             this.panel1.Location = new System.Drawing.Point(472, 132);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(580, 395);
+            this.panel1.Size = new System.Drawing.Size(699, 582);
             this.panel1.TabIndex = 11;
             // 
             // buttonVisualize
@@ -208,7 +208,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1077, 652);
+            this.ClientSize = new System.Drawing.Size(1222, 768);
             this.Controls.Add(this.listPlaces);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelPlaces);
