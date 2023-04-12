@@ -104,7 +104,7 @@ namespace PathFinder
             List<Vertex> arr = new List<Vertex>();
             for (int j = 0; j < vertexCount; j++)
             {
-                if (adjacencyMatrix[i, j] == 1)
+                if (adjacencyMatrix[i, j] > 0)
                 {
                     arr.Add(vertices[j]);
                 }

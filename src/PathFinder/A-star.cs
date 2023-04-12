@@ -48,6 +48,7 @@ namespace PathFinder
                     }
                 }
             }
+            distance += min.Item2;
             return min.Item1;
         }
 

@@ -40,6 +40,7 @@
             this.textBoxEnd = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonVisualize = new System.Windows.Forms.Button();
+            this.labelNotif = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelPathFinder
@@ -158,12 +159,22 @@
             this.buttonVisualize.UseVisualStyleBackColor = true;
             this.buttonVisualize.Click += new System.EventHandler(this.buttonVisualize_Click);
             // 
+            // labelNotif
+            // 
+            this.labelNotif.AutoSize = true;
+            this.labelNotif.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNotif.Location = new System.Drawing.Point(64, 610);
+            this.labelNotif.Name = "labelNotif";
+            this.labelNotif.Size = new System.Drawing.Size(0, 29);
+            this.labelNotif.TabIndex = 13;
+            // 
             // PathFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1077, 652);
+            this.Controls.Add(this.labelNotif);
             this.Controls.Add(this.buttonVisualize);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBoxEnd);
@@ -196,6 +207,7 @@
         private System.Windows.Forms.TextBox textBoxEnd;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonVisualize;
+        private System.Windows.Forms.Label labelNotif;
     }
 }
 

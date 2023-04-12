@@ -51,8 +51,24 @@ namespace PathFinder
             }
             if (buttonUCS.Checked == true)
             {
-                UCS ucs = new UCS(filegraph, start, end);
-                ucs.UCSSolver();
+                List<VertexPathCost> neigh;
+                UCS u = new UCS(filegraph, start, end);
+                u.UCSSolver();
+
+                // buat graf dari history
+                Node nodestart = new Node(u.history[0].Item1.vertex.locName + " (" + u.history[0].Item1.cost.ToString() + ")");
+                for (int i = 0; i < u.history.Count; i++)
+                {
+                    neigh = u.history[i].Item2;
+                    // buat node tiap tetangga
+                    for (int j = 0; j < neigh.Count; j++)
+                    {
+                        Microsoft.Msagl.Drawing.Node node = new Microsoft.Msagl.Drawing.Node(neigh[j].vertex.locName + " (" + neigh[j]);
+
+                        graph.AddEdge(u.history[i].Item2[j].vertex.locName, "", node.Id);
+                    }
+                    
+                }
 
             }
             if (buttonA.Checked == true)
@@ -60,26 +76,27 @@ namespace PathFinder
                 List<Vertex> neigh;
                 Astar a = new Astar(filegraph, start, end);
                 a.search();
-                for(int i = 0; i < a.solution.Count-1; i++)
+                labelNotif.Text = "Distance: " + a.distance.ToString();
+                Microsoft.Msagl.Drawing.Node nodestart = new Microsoft.Msagl.Drawing.Node(1.ToString() + " " + a.solution[0].locName);
+                nodestart.Attr.FillColor = Microsoft.Msagl.Drawing.Color.Yellow;
+                Microsoft.Msagl.Drawing.Node currentNode = nodestart;
+                for (int i = 0; i < a.solution.Count - 1; i++)
                 {
-                    graph.AddEdge(a.solution[i].locName, a.solution[i + 1].locName);
+                    // buat node tiap tetangga
                     neigh = filegraph.getNeighbour(a.solution[i]);
-                    for(int j = 0; j < neigh.Count; j++)
+                    for (int j = 0; j < neigh.Count; j++)
                     {
-                        graph.AddEdge(a.solution[i].locName, neigh[i].locName);
-                        /*
-                        if (graph.FindNode(neigh[i].locName) == null)
-                        {
-                            graph.AddEdge(a.solution[i].locName, neigh[i].locName);
-                        }
-                        else
-                        {
-                            graph.AddEdge(a.solution[i].locName, neigh[i].locName + " ");
-                        }*/
+                        Microsoft.Msagl.Drawing.Node node = new Microsoft.Msagl.Drawing.Node((i + 2).ToString() + " " + neigh[j].locName);
+                        graph.AddEdge(currentNode.Id, "", node.Id);
                     }
+                    // current node menjadi solusi elemen selanjutnya
+                    IEnumerable<Microsoft.Msagl.Drawing.Node> matchingNodes = graph.Nodes.Where(node => node.LabelText.Contains(a.solution[i + 1].locName));
+                    foreach (Microsoft.Msagl.Drawing.Node node in matchingNodes)
+                    {
+                        currentNode = node;
+                    }
+                    currentNode.Attr.FillColor = Microsoft.Msagl.Drawing.Color.Yellow;
                 }
-                graph.FindNode(start.locName).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Yellow;
-                graph.FindNode(end.locName).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Yellow;
             }
 
 
