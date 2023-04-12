@@ -32,7 +32,7 @@ namespace PathFinder
 
             // Generate map
             FileReader reader = new FileReader();
-            Graph filegraph = reader.readFile(textBoxFileName.Text);
+            Graph filegraph = reader.readFile(textBoxFile.Text);
             Vertex start, end;
             if (textBoxStart.Text == "")
             {
@@ -198,7 +198,7 @@ namespace PathFinder
                 listPlaces.Items.Clear();
                 labelNotif.Text = "";
                 FileReader reader = new FileReader();
-                Graph filegraph = reader.readFile(textBoxFileName.Text);
+                Graph filegraph = reader.readFile(textBoxFile.Text);
                 // isi textboxt dengan tempat
                 for (int i = 0; i < filegraph.vertices.Count; i++)
                 {
@@ -208,6 +208,15 @@ namespace PathFinder
             catch (FileNotFoundException)
             {
                 labelNotif.Text = "File Not Found.";
+            }
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxFile.Text = ofd.FileName;
             }
         }
     }

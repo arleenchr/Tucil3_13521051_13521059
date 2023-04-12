@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.labelPathFinder = new System.Windows.Forms.Label();
-            this.textBoxFileName = new System.Windows.Forms.TextBox();
             this.labelFileName = new System.Windows.Forms.Label();
             this.labelMethod = new System.Windows.Forms.Label();
             this.buttonUCS = new System.Windows.Forms.RadioButton();
@@ -44,6 +43,9 @@
             this.labelPlaces = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.listPlaces = new System.Windows.Forms.ListBox();
+            this.buttonBrowse = new System.Windows.Forms.Button();
+            this.labelFile = new System.Windows.Forms.Label();
+            this.textBoxFile = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labelPathFinder
@@ -55,14 +57,6 @@
             this.labelPathFinder.Size = new System.Drawing.Size(252, 49);
             this.labelPathFinder.TabIndex = 1;
             this.labelPathFinder.Text = "PATH FINDER";
-            // 
-            // textBoxFileName
-            // 
-            this.textBoxFileName.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxFileName.Location = new System.Drawing.Point(60, 131);
-            this.textBoxFileName.Name = "textBoxFileName";
-            this.textBoxFileName.Size = new System.Drawing.Size(187, 32);
-            this.textBoxFileName.TabIndex = 2;
             // 
             // labelFileName
             // 
@@ -112,7 +106,7 @@
             // 
             this.labelStart.AutoSize = true;
             this.labelStart.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStart.Location = new System.Drawing.Point(56, 367);
+            this.labelStart.Location = new System.Drawing.Point(56, 426);
             this.labelStart.Name = "labelStart";
             this.labelStart.Size = new System.Drawing.Size(128, 29);
             this.labelStart.TabIndex = 7;
@@ -122,7 +116,7 @@
             // 
             this.labelEnd.AutoSize = true;
             this.labelEnd.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEnd.Location = new System.Drawing.Point(56, 457);
+            this.labelEnd.Location = new System.Drawing.Point(56, 516);
             this.labelEnd.Name = "labelEnd";
             this.labelEnd.Size = new System.Drawing.Size(116, 29);
             this.labelEnd.TabIndex = 8;
@@ -131,7 +125,7 @@
             // textBoxStart
             // 
             this.textBoxStart.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxStart.Location = new System.Drawing.Point(61, 401);
+            this.textBoxStart.Location = new System.Drawing.Point(61, 460);
             this.textBoxStart.Name = "textBoxStart";
             this.textBoxStart.Size = new System.Drawing.Size(187, 32);
             this.textBoxStart.TabIndex = 9;
@@ -139,7 +133,7 @@
             // textBoxEnd
             // 
             this.textBoxEnd.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxEnd.Location = new System.Drawing.Point(60, 489);
+            this.textBoxEnd.Location = new System.Drawing.Point(60, 548);
             this.textBoxEnd.Name = "textBoxEnd";
             this.textBoxEnd.Size = new System.Drawing.Size(187, 32);
             this.textBoxEnd.TabIndex = 10;
@@ -154,7 +148,7 @@
             // buttonVisualize
             // 
             this.buttonVisualize.Font = new System.Drawing.Font("Candara", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonVisualize.Location = new System.Drawing.Point(60, 534);
+            this.buttonVisualize.Location = new System.Drawing.Point(60, 593);
             this.buttonVisualize.Name = "buttonVisualize";
             this.buttonVisualize.Size = new System.Drawing.Size(111, 36);
             this.buttonVisualize.TabIndex = 12;
@@ -166,7 +160,7 @@
             // 
             this.labelNotif.AutoSize = true;
             this.labelNotif.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNotif.Location = new System.Drawing.Point(66, 592);
+            this.labelNotif.Location = new System.Drawing.Point(66, 651);
             this.labelNotif.Name = "labelNotif";
             this.labelNotif.Size = new System.Drawing.Size(0, 29);
             this.labelNotif.TabIndex = 13;
@@ -175,7 +169,7 @@
             // 
             this.labelPlaces.AutoSize = true;
             this.labelPlaces.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPlaces.Location = new System.Drawing.Point(59, 220);
+            this.labelPlaces.Location = new System.Drawing.Point(59, 279);
             this.labelPlaces.Name = "labelPlaces";
             this.labelPlaces.Size = new System.Drawing.Size(83, 29);
             this.labelPlaces.TabIndex = 15;
@@ -184,7 +178,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Candara", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(60, 175);
+            this.button1.Location = new System.Drawing.Point(60, 235);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(164, 36);
             this.button1.TabIndex = 16;
@@ -197,11 +191,40 @@
             this.listPlaces.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listPlaces.FormattingEnabled = true;
             this.listPlaces.ItemHeight = 24;
-            this.listPlaces.Location = new System.Drawing.Point(64, 252);
+            this.listPlaces.Location = new System.Drawing.Point(64, 311);
             this.listPlaces.Name = "listPlaces";
             this.listPlaces.ScrollAlwaysVisible = true;
             this.listPlaces.Size = new System.Drawing.Size(335, 100);
             this.listPlaces.TabIndex = 17;
+            // 
+            // buttonBrowse
+            // 
+            this.buttonBrowse.Font = new System.Drawing.Font("Candara", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBrowse.Location = new System.Drawing.Point(60, 171);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(103, 36);
+            this.buttonBrowse.TabIndex = 18;
+            this.buttonBrowse.Text = "BROWSE";
+            this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
+            // 
+            // labelFile
+            // 
+            this.labelFile.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFile.Location = new System.Drawing.Point(69, 133);
+            this.labelFile.Name = "labelFile";
+            this.labelFile.Size = new System.Drawing.Size(204, 29);
+            this.labelFile.TabIndex = 19;
+            // 
+            // textBoxFile
+            // 
+            this.textBoxFile.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBoxFile.Font = new System.Drawing.Font("Candara", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFile.Location = new System.Drawing.Point(60, 130);
+            this.textBoxFile.Name = "textBoxFile";
+            this.textBoxFile.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.textBoxFile.Size = new System.Drawing.Size(213, 32);
+            this.textBoxFile.TabIndex = 20;
             // 
             // PathFinder
             // 
@@ -209,6 +232,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1222, 768);
+            this.Controls.Add(this.textBoxFile);
+            this.Controls.Add(this.labelFile);
+            this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.listPlaces);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelPlaces);
@@ -223,7 +249,6 @@
             this.Controls.Add(this.buttonUCS);
             this.Controls.Add(this.labelMethod);
             this.Controls.Add(this.labelFileName);
-            this.Controls.Add(this.textBoxFileName);
             this.Controls.Add(this.labelPathFinder);
             this.Name = "PathFinder";
             this.Text = "Path Finder";
@@ -234,7 +259,6 @@
 
         #endregion
         private System.Windows.Forms.Label labelPathFinder;
-        private System.Windows.Forms.TextBox textBoxFileName;
         private System.Windows.Forms.Label labelFileName;
         private System.Windows.Forms.Label labelMethod;
         private System.Windows.Forms.RadioButton buttonUCS;
@@ -249,6 +273,9 @@
         private System.Windows.Forms.Label labelPlaces;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listPlaces;
+        private System.Windows.Forms.Button buttonBrowse;
+        private System.Windows.Forms.Label labelFile;
+        private System.Windows.Forms.TextBox textBoxFile;
     }
 }
 

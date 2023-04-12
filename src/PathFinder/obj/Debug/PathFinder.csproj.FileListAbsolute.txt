@@ -42,3 +42,6 @@ D:\GitHub\Tucil3_13521051_13521059\src\PathFinder\bin\Debug\System.Memory.xml
 D:\GitHub\Tucil3_13521051_13521059\src\PathFinder\bin\Debug\System.Numerics.Vectors.xml
 D:\GitHub\Tucil3_13521051_13521059\src\PathFinder\bin\Debug\System.Resources.Extensions.xml
 D:\GitHub\Tucil3_13521051_13521059\src\PathFinder\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitHub\Tucil3_13521051_13521059\bin\WindowsFormsApp1.exe.config
+D:\GitHub\Tucil3_13521051_13521059\bin\WindowsFormsApp1.exe
+D:\GitHub\Tucil3_13521051_13521059\bin\WindowsFormsApp1.pdb
