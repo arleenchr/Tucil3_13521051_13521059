@@ -62,6 +62,10 @@ Tucil3_13521051_13521059
 - Buka folder "bin"
 - Jalankan (double klik) "PathFinder.exe"
 
+## Tampilan Program
+![image](https://user-images.githubusercontent.com/89202471/231509624-38e8b98a-54f7-4d3f-abcf-5eeb79f24abc.png)
+
+
 ## Credits
 | NIM       | Nama                       |
 | --------- | ---------------------------|
