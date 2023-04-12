@@ -1,15 +1,22 @@
-﻿using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+﻿using PathFinder;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PathFinder
 {
     public class Astar : Solver
     {
-        /* ctor */
-        public Astar(Graph g, Vertex s, Vertex e) : base(g,s,e) { }
+        public List<(VertexPathCost, List<VertexPathCost>)> history { get; set; }
 
-        /* method */
+        public Astar(Graph g, Vertex s, Vertex e) : base(g, s, e)
+        {
+            history = new List<(VertexPathCost, List<VertexPathCost>)>() { };
+        }
+
         public double straightDist(Vertex v1, Vertex v2)
         {
             double v1lat = v1.coordinate.latitude * (Math.PI / 180);
@@ -22,107 +29,111 @@ namespace PathFinder
             return d;
         }
 
-        public List<(Vertex, double)> getNeighDist(Vertex v)
+        public void AstarSolver()
         {
-            List<(Vertex, double)> withDist = new List<(Vertex, double)>();
-            List<Vertex> neigh = graph.getNeighbour(v);
+            /* initialize */
+            solution = new List<Vertex>() { };
+            distance = 0;
+            PriorityQueueCost prioqueue = new PriorityQueueCost();
+            VertexPathCost currentVertex = new VertexPathCost(start, new List<Vertex>() { }, distance);
+            Boolean isArrived = (currentVertex.vertex == end);
+            Boolean[] isVisited = new Boolean[graph.vertexCount];
+            double cost;
 
-            for (int i = 0; i < neigh.Count; i++)
+            // Add vertices adjacent with start vertex to prioqueue
+            for (int j = 0; j < graph.vertexCount; j++)
             {
-                withDist.Add((neigh[i], straightDist(neigh[i], end) + distance));
-            }
-
-            return withDist;
-        }
-
-        public Vertex chooseNeigh(List<(Vertex, double)> neigh)
-        {
-            (Vertex, double) min = neigh[0]; ;
-            for (int i = 1; i < neigh.Count; i++)
-            {
-                if (!contain(neigh[i].Item1))
+                if (graph.adaJalan(start, graph.vertices[j]))
                 {
-                    if (neigh[i].Item2 < min.Item2)
+                    cost = graph.getWeight(start, graph.vertices[j]) + straightDist(graph.vertices[j], end);
+                    prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], new List<Vertex>() { start }, cost));
+                    //Console.WriteLine("     Enqueue");
+                    //Console.WriteLine(String.Format("     {0}, path = {1}, {2}", graph.vertices[j].locName, start.locName, cost));
+
+                }
+            }
+            history.Add((currentVertex, prioqueue.queue)); // add to history
+            isVisited[graph.findIndex(start)] = true; // marked as visited
+
+            // Search while hasn't arrived at the destination and prioqueue is not empty
+            while (!isArrived && prioqueue.Count() > 0)
+            {
+                // Dequeue
+                currentVertex = prioqueue.Peek();
+                prioqueue.Dequeue();
+                isVisited[graph.findIndex(currentVertex.vertex)] = true;
+                /*
+                Console.Write(String.Format("Current = {0}, path = ", currentVertex.vertex.locName));
+                for (int i = 0; i < currentVertex.path.Count; i++)
+                {
+                    Console.Write(String.Format("{0}, ", currentVertex.path[i].locName));
+                }
+                Console.WriteLine(currentVertex.cost);
+                */
+
+                // check if has reached the destination
+                if (currentVertex.vertex == end)
+                {
+                    isArrived = true;
+                    currentVertex.path.Add(currentVertex.vertex);
+                    history.Add((currentVertex, new List<VertexPathCost>() { }));
+                    break;
+                }
+
+                // enqueue
+                List<VertexPathCost> historyQueue = new List<VertexPathCost>() { };
+                for (int j = 0; j < graph.vertexCount; j++)
+                {
+                    if (!isVisited[j] && graph.adaJalan(currentVertex.vertex, graph.vertices[j]))
                     {
-                        min = neigh[i];
+                        //Console.WriteLine("     Enqueue");
+
+                        List<Vertex> currentPath = new List<Vertex>(currentVertex.path);
+                        if (currentPath.Last() != currentVertex.vertex)
+                        {
+                            currentPath.Add(currentVertex.vertex);
+                        }
+                        cost = currentVertex.cost + graph.getWeight(currentVertex.vertex, graph.vertices[j]) + straightDist(graph.vertices[j], end);
+                        prioqueue.Enqueue(new VertexPathCost(graph.vertices[j], currentPath, cost));
+                        historyQueue.Add(new VertexPathCost(graph.vertices[j], currentPath, cost));
+
+                        /*
+                        Console.Write(String.Format("     {0}, path = ", graph.vertices[j].locName));
+                        for (int i = 0; i < currentPath.Count; i++)
+                        {
+                            Console.Write(String.Format("{0}, ", currentPath[i].locName));
+                        }
+                        Console.WriteLine(cost);
+                        */
                     }
                 }
+                history.Add((currentVertex, historyQueue)); // add to history
             }
-            //distance += min.Item2;
-            return min.Item1;
-        }
 
-        public bool contain(Vertex v)
-        {
-            bool found = false;
-            int i = 0;
-            while (i < solution.Count && !found)
+            if (prioqueue.Count() == 0 && !isArrived)
             {
-                if (solution[i] == v)
+                // path tidak ditemukan
+                distance = 0;
+                solution = new List<Vertex>() { };
+            }
+            else
+            {
+                // result
+                if (currentVertex.vertex == start)
                 {
-                    found = true;
+                    currentVertex.path.Add(start);
                 }
-                else
+                solution = currentVertex.path;
+                distance = 0;
+                Vertex v1;
+                Vertex v2;
+                for (int i = 0; i < solution.Count - 1; i++)
                 {
-                    i++;
+                    v1 = solution[i];
+                    v2 = solution[i + 1];
+                    distance += graph.getWeight(v1, v2);
                 }
             }
-            return found;
         }
-
-        public bool containEnd()
-        {
-            return contain(end);
-        }
-
-        public void printSolution()
-        {
-            for (int i = 0; i < solution.Count; i++)
-            {
-                Console.Write(solution[i].locName);
-                Console.Write(" ");
-            }
-            Console.WriteLine("");
-        }
-
-        public void search()
-        {
-            solution.Add(start);
-            Vertex curr = start;
-
-            while (!containEnd())
-            {
-                // generate tetangga
-                List<(Vertex, double)> neighbour = getNeighDist(curr);
-
-                // pilih tetangga
-                Vertex chosen = chooseNeigh(neighbour);
-                distance += graph.getWeight(curr, chosen);
-                // add solution
-                solution.Add(chosen);
-                printSolution();
-
-                curr = chosen;
-            }
-        }
-
-
-        // public static void Main(){
-        //     Console.WriteLine("START");
-        //     FileReader reader = new FileReader();
-        //     Graph graph = reader.readFile("\\c #\\tes path finder\\Sample.txt");
-        //     Astar a = new Astar(graph, graph.vertices[0], graph.vertices[2]);
-        //     Console.WriteLine(a.start.locName);
-        //     Console.WriteLine(a.end.locName);
-
-        //     List<(Vertex, double)> neighbour = a.getNeighDist(a.start);
-        //     Console.WriteLine("ITB Neighbour: ");
-        //     for(int i = 0; i < neighbour.Count; i++){
-        //         Console.Write(neighbour[i].Item1.locName);
-        //         Console.WriteLine(neighbour[i].Item2.ToString());
-        //     }
-
-        //     a.search();
-        // }
     }
 }
