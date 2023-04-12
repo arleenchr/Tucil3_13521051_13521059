@@ -15,7 +15,7 @@ namespace PathFinder
         {
             Graph graph = new Graph();
 
-            string pathfilename = "..\\..\\" + filename;
+            string pathfilename = "..\\..\\..\\..\\bin\\" + filename;
 
             using (StreamReader reader = new StreamReader(pathfilename))
             {
